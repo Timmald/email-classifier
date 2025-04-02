@@ -2,8 +2,8 @@ import csv
 import email_to_vector
 csv.field_size_limit(1000000000)
 
-ham_path = '/Users/adamlubomirski/Documents/Coding Projects/Email Classifier/email-classifier/datasets/enron_spam/ham.csv'
-spam_path = '/Users/adamlubomirski/Documents/Coding Projects/Email Classifier/email-classifier/datasets/enron_spam/spam.csv'
+ham_path = 'datasets/enron_spam/ham.csv'
+spam_path = 'datasets/enron_spam/spam.csv'
 column_data = []
 
 
