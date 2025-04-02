@@ -6,6 +6,8 @@ ham_path = '/Users/adamlubomirski/Documents/Coding Projects/Email Classifier/ema
 spam_path = '/Users/adamlubomirski/Documents/Coding Projects/Email Classifier/email-classifier/datasets/enron_spam/spam.csv'
 column_data = []
 
+
+#just testing first 10, not sure if it was correct because the messages that it did output were kinda grammatically strange
 def first_ten(file_path):
         with open(file_path, newline="") as file:
             reader = csv.reader(file)
