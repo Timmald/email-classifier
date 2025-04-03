@@ -27,6 +27,7 @@ print("Dataset columns:", dataset.column_names)
 # Function to clean email text
 def clean_email(email):
     """Removes stopwords, newlines, and non-alphanumeric characters, and lowercases the text."""
+    email = re.sub("\\n", " ", email).lower()
     email = re.sub(r"[^a-zA-Z0-9 ]", "", email).lower()
     words = email.split()
     filtered_email = " ".join(word for word in words if word not in stopwords_list)
