@@ -33,7 +33,7 @@ def email_to_vector(email):
     sentence_embedding = word_embeddings.mean(dim=1)  # Average pooling along the sequence length dimension
     return sentence_embedding[0]
 
-
-print(email_to_vector("hello my name is maya "))
+if __name__ == "__main__":
+    print(email_to_vector("hello my name is maya "))
 
 
