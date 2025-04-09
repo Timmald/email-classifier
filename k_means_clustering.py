@@ -14,5 +14,12 @@ def center(vectors):
     kmeans.fit(vectors)
     return(kmeans.cluster_centers_)
 
-#test:
+
 print(center(Spamlist))
+
+
+
+
+#scikit train_test_split()
+#splits dataset in half, so for training
+#two lists of vectors, label everything, tuple method
