@@ -51,4 +51,11 @@ for label, text in matched[:5]:
 
 
 
+print(center(Spamlist))
 
+
+
+
+#scikit train_test_split()
+#splits dataset in half, so for training
+#two lists of vectors, label everything, tuple method

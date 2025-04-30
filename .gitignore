@@ -1,1 +1,13 @@
-__pycache__/*
+hamV.csv
+spamV.csv
+newsgroups.csv
+newsgroupsV.csv
+newgroupsIndexed.csv
+newsgroups_minimal.csv
+newsgroups_minimalIndexed.csv
+newsgroups_minimalV.csv
+newsgroups_stopwords_kept.csv
+newsgroups_stopwords_keptIndexed.csv
+newsgroups_stopwords_keptV.csv
+newsgroupsIndexed2.csv
+newsgroupsV2.csv
