@@ -62,7 +62,7 @@ def main():
         labeledArr[label] += text
 
     for key, value in labeledArr.items():
-        print(f"Label: {key}, Text: {value[:10000]}")
+        print(f"Label: {key}, Text: {value[:100]}")
 
     return labeledArr
   
