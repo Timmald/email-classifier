@@ -3,7 +3,7 @@ import math
 import csv
 from tqdm import tqdm
 
-#assume you have clusters of emails: 
+indexed_file_path = "newsgroupsIndexed2.csv"
 
 #given file:
 def popular_words(cluster, all, cluster_number):
@@ -67,7 +67,7 @@ def popular_words(cluster, all, cluster_number):
 
 #Testing: 
 # Load email from CSV file
-with open(r"/Users/mayahome/Downloads/newsgroupsIndexed2.csv", 'r') as email_file:
+with open(indexed_file_path, 'r') as email_file:
     csv_reader = csv.reader(email_file)
     emailArr: list[str] = []
 

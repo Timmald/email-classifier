@@ -27,5 +27,7 @@ def get_vectors():
     print("Read csv file")   
 
 get_vectors()
-embedding = umap.UMAP(n_components=2, metric='euclidean').fit(vectorsArr)
-f = umap.plot.points(embedding)
+embedding = umap.UMAP(n_components=2).fit(vectorsArr)
+umap.plot.points(embedding)
+#must add break point on below line for it work and then run it using python debugger!!
+print("hi")
