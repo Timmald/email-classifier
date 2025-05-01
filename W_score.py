@@ -3,6 +3,8 @@ import math
 import csv
 from tqdm import tqdm
 
+import newsgroupsV_clusters
+
 #assume you have clusters of emails: 
 
 #given file:
@@ -67,20 +69,37 @@ def popular_words(cluster, all, cluster_number):
 
 #Testing: 
 # Load email from CSV file
-with open(r"/Users/mayahome/Downloads/newsgroupsIndexed2.csv", 'r') as email_file:
-    csv_reader = csv.reader(email_file)
-    emailArr: list[str] = []
+# with open(r"/Users/mayahome/Downloads/newsgroupsIndexed2.csv", 'r') as email_file:
+#     csv_reader = csv.reader(email_file)
+#     emailArr: list[str] = []
 
-    for item in csv_reader:
-        emailArr.append(item[0])  
+#     for item in csv_reader:
+#         emailArr.append(item[0])  
     
-    # create 2 clusters
-    quarter = len(emailArr) // 100
-    cluster_1 = ' '.join(emailArr[:quarter])
-    cluster_2 = ' '.join(emailArr[quarter:2*quarter])  
+#     # create 2 clusters
+#     quarter = len(emailArr) // 100
+#     cluster_1 = ' '.join(emailArr[:quarter])
+#     cluster_2 = ' '.join(emailArr[quarter:2*quarter])  
 
-    all = cluster_1 + cluster_2 
-    W_list = popular_words(cluster_1, all, 2)
-    print(W_list)
+#     all = cluster_1 + cluster_2 
+#     W_list = popular_words(cluster_1, all, 2)
+#     print(W_list)
+
+# newsgroupsV_clusters.main
+
+# using clustered text data from newsgroupsV_cluster.py
+
+labeled_clusters = newsgroupsV_clusters.main()
+
+all_text = " ".join(labeled_clusters.values())
+
+cluster_number = len(labeled_clusters)
+
+for label, cluster_text in labeled_clusters.items():
+    print(f"\nCluster {label}:")
+    top_words = popular_words(cluster_text, all_text, cluster_number)
+    print(top_words)
+
+
 
 
