@@ -25,6 +25,7 @@ def main():
         print("[vectors] open csv file")
         csv_reader = csv.reader(vector)
         print("read csv file")
+        next(csv_reader)
         vectorsArr = []    
         for item in csv_reader: 
             vectorsArr.append(item)
@@ -39,6 +40,7 @@ def main():
         print("[emails] open csv file")
         csv_reader = csv.reader(email)
         print("read csv file")
+        next(csv_reader)
         emailArr = []
         for item in csv_reader: 
             emailArr.append(item)
