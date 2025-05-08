@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import bokeh 
 from bokeh.plotting import show, save, output_notebook, output_file
 from bokeh.resources import INLINE
+from sklearn.cluster import KMeans
 import datashader 
 import holoviews 
 import skimage
@@ -34,7 +35,9 @@ embedding = reducer.fit_transform(vectorsArr)
 df = pd.DataFrame(embedding, columns=['x', 'y'])
 df.to_csv('newsgroupsV2REDUCED.csv', index=False)
 
-umap.plot.points(embedding)
+kmeans = KMeans(7)
+cluster_results = kmeans.fit_predict(embedding)
+umap.plot.points(reducer, labels=cluster_results)
 
 #must add break point on below line for it work and then run it using python debugger!!
 print("hi")
