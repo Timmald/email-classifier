@@ -2,6 +2,7 @@ import numpy
 import math 
 import csv
 from tqdm import tqdm
+import newsgroupsV_clusters
 
 #assume you have clusters of emails: 
 
@@ -17,6 +18,9 @@ def popular_words(cluster, all, cluster_number):
 
     #A finding avergae number of words per cluster 
     unique_all, count_all = numpy.unique(all, return_counts=True)
+    #make these into dictonary: 
+    allDict = dict(zip(unique_all, count_all))
+
     # make unique_all into array indv words
     print(len(unique_all))
     print(len(unique_cluster))
@@ -34,18 +38,25 @@ def popular_words(cluster, all, cluster_number):
     for word_c_index in tqdm(range(len(unique_cluster))):
         # tf[t] now find how many times word appears in unique_all
         word_in_all = 0
-        for word_all_index in (range(len(unique_all))):
-            # print(len(unique_all))
-            if unique_all[word_all_index] == unique_cluster[word_c_index]:
-                word_in_all += count_all[word_all_index]
+        if unique_cluster[word_c_index] in allDict:
+            word_in_all+= allDict[unique_cluster[word_c_index]]
+
+
+        # for word_all_index in (range(len(unique_all))):
+        #     # print(len(unique_all))
+        #     if unique_all[word_all_index] == unique_cluster[word_c_index]:
+        #         word_in_all += count_all[word_all_index]
 
         #now apply formula: 
         W = count_cluster[word_c_index] * math.log(1+(A/word_in_all))
+
+        #if word occurs in all less than 5 times, add 0 to the W score
+        if count_cluster[word_c_index]<5:
+            W = 0
         W_list.append(W)
 
 
     # get top 3 popular words:
-    # W_list = numpy.array(W_list)
 
     max_1 = numpy.max(W_list)
     max1_index = W_list.index(max_1)
@@ -62,25 +73,34 @@ def popular_words(cluster, all, cluster_number):
 
     return [unique_cluster[max1_index],unique_cluster[max2_index], unique_cluster[max3_index]]
 
-    # need to add in return most popular score
 
 
 #Testing: 
 # Load email from CSV file
-with open(r"/Users/mayahome/Downloads/newsgroupsIndexed2.csv", 'r') as email_file:
-    csv_reader = csv.reader(email_file)
-    emailArr: list[str] = []
+# with open(r"/Users/mayahome/Downloads/newsgroupsIndexed2.csv", 'r') as email_file:
+    # csv_reader = csv.reader(email_file)
+    # emailArr: list[str] = []
 
-    for item in csv_reader:
-        emailArr.append(item[0])  
+    # for item in csv_reader:
+    #     emailArr.append(item[0])  
     
-    # create 2 clusters
-    quarter = len(emailArr) // 100
-    cluster_1 = ' '.join(emailArr[:quarter])
-    cluster_2 = ' '.join(emailArr[quarter:2*quarter])  
+    # # create 2 clusters
+    # half = int(len(emailArr) /2)
+    # cluster_1 = ' '.join(emailArr[:half])
+    # cluster_2 = ' '.join(emailArr[half:])  
 
-    all = cluster_1 + cluster_2 
-    W_list = popular_words(cluster_1, all, 2)
-    print(W_list)
+    # all = cluster_1 + cluster_2 
+    # W_list = popular_words(cluster_1, all, 2)
+    # print(W_list)
 
 
+labeled_clusters = newsgroupsV_clusters.main()
+
+all_text = " ".join(labeled_clusters.values())
+
+cluster_number = len(labeled_clusters)
+
+for label, cluster_text in labeled_clusters.items():
+    print(f"\nCluster {label}:")
+    top_words = popular_words(cluster_text, all_text, cluster_number)
+    print(top_words)
