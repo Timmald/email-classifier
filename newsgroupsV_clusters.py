@@ -3,8 +3,8 @@ from sklearn.cluster import KMeans
 import numpy as np
 import csv
 
-vector_file_path = "newsgroupsV2.csv"
-indexed_file_path = "newsgroupsIndexed2.csv"
+vector_file_path = r"C:\Users\minhy\Downloads\newsgroupsV2.csv"
+indexed_file_path = r"C:\Users\minhy\Downloads\newsgroupsIndexed2.csv"
 
 #(UNUSED) find cluster centers using KMeans with 2 clusters
 def center(vectors):
@@ -25,6 +25,7 @@ def main():
         print("[vectors] open csv file")
         csv_reader = csv.reader(vector)
         print("read csv file")
+        next(csv_reader)
         vectorsArr = []    
         for item in csv_reader: 
             vectorsArr.append(item)
@@ -39,6 +40,7 @@ def main():
         print("[emails] open csv file")
         csv_reader = csv.reader(email)
         print("read csv file")
+        next(csv_reader)
         emailArr = []
         for item in csv_reader: 
             emailArr.append(item)
@@ -51,9 +53,21 @@ def main():
     for label, email in zip(labeledVectors, emailArr):
         matched.append((label, email[0]))
 
+    # for label, text in matched:
+    #     print(f"Label {label}: {text[:100]}...")
+
+    # Merge each label into one giant string
+    labeledArr = {}
     for label, text in matched:
-        print(f"Label {label}: {text[:100]}...")
+        if label not in labeledArr:
+            labeledArr[label] = text
+        labeledArr[label] += text
 
+    for key, value in labeledArr.items():
+        print(f"Label: {key}, Text: {value[:100]}")
 
+    return labeledArr
+  
+if __name__ == "__main__":
+    main()
 
-main()
