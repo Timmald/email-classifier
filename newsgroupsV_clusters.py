@@ -3,8 +3,8 @@ from sklearn.cluster import KMeans
 import numpy as np
 import csv
 
-vector_file_path = r"C:\Users\minhy\Downloads\newsgroupsV2.csv"
-indexed_file_path = r"C:\Users\minhy\Downloads\newsgroupsIndexed2.csv"
+vector_file_path = "newsgroupsV2.csv"
+indexed_file_path = "newsgroupsIndexed2.csv"
 
 #(UNUSED) find cluster centers using KMeans with 2 clusters
 def center(vectors):
